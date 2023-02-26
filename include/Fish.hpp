@@ -2,6 +2,8 @@
 #define FISH_H_DEFINED
 
 #include <string>
+#include <memory>
+#include "Constants.hpp"
 class Fish
 {
 private:
@@ -14,7 +16,9 @@ public:
     void setName(std::string newName) { name = newName; };
     bool getGender() const { return gender; };
     void setGender(bool newGender) { gender = newGender; };
-    void displayIdentity() const; 
+    // void eatFish(int index) {}; to be used later
+    //void eatAlgua(int& alguae) { alguae--;};
+    virtual void displayIdentity() const;
 };
 
 
