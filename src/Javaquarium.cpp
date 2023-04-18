@@ -29,11 +29,23 @@ void Javaquarium::actualize()
     std::cout << "------------Round " << count << "-------------" << std::endl;
     int edible = 0;
     //Algae growing
-    for (const auto alga : algae)
-        alga->grow();
-    for (const auto fish : fishes)
+    for (int i = 0 ; i < algae.size() ; i++)
     {
-        fish->isHungry();
+        algae[i]->actualize();
+        if (algae[i]->getLifeSpan() >= 20)
+        {
+            algae.erase(algae.begin() + i);
+            i--;
+        }
+    }    
+    for (int i = 0 ; i < fishes.size() ; i++)
+    {
+        fishes[i]->actualize();
+        if(fishes[i]->getLifeSpan() >= 20)
+        {
+            fishes.erase(fishes.begin() + i);
+            i--;
+        }
     }
     
     //Fishes' lives
@@ -43,20 +55,29 @@ void Javaquarium::actualize()
         {
             fishes.erase(fishes.begin() + i);
         }
-        else if(fishes[i]->getGender() && fishes[i]->getLife() <= 5) // IF CARNOVOROUS
+        if (fishes[i]->getLife() <= 5)
         {
-            if(fishes.size() > 1 && std::find_if(fishes.begin(), fishes.end(), [fish = fishes[i]](Fish *fishToBeFound) { return fishToBeFound->getBreed() != fish->getBreed();}) != fishes.end())
+            if(fishes[i]->getIsCarnivorous()) // IF CARNOVOROUS
             {
-                edible = getRandomFishIndex(fishes[i]);
-                fishes[edible]->isBitten();
+                if(fishes.size() > 1 && std::find_if(fishes.begin(), fishes.end(), [fish = fishes[i]](Fish *fishToBeFound) { return fishToBeFound->getBreed() != fish->getBreed();}) != fishes.end())
+                {
+                    edible = getRandomFishIndex(fishes[i]);
+                    fishes[edible]->isBitten();
+                    fishes[i]->eatFish();
+                    if(fishes[edible]->getLife() <= 0)
+                    {
+                        fishes.erase(fishes.begin() + edible);
+                    }
+                }
             }
-        }
-        else
-        {
-            edible = std::rand() % algae.size();
-            algae[edible]->isEaten();
-            if(algae[edible]->getLifePoints() == 0)
-                algae.erase(algae.begin() + edible);
+            else
+            {
+                edible = std::rand() % algae.size();
+                algae[edible]->isEaten();
+                fishes[i]->eatAlga();
+                if(algae[edible]->getLifePoints() <= 0)
+                    algae.erase(algae.begin() + edible);
+            }
         }
         fishes[i]->displayIdentity();
     }

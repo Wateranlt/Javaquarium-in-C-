@@ -7,8 +7,8 @@ int main(int argc, char const *argv[])
     new Fish("Will", true, true, enumBreed::tuna),
     new Fish("Zach", true, false, enumBreed::sole)};
     
-    Javaquarium *simulation = new Javaquarium(5, fishes);
-    for(int i = 0 ; i < 20 ; i++)
+    Javaquarium *simulation = new Javaquarium(3, fishes);
+    for(int i = 0 ; i < 22 ; i++)
     {
         simulation->actualize();
     }
