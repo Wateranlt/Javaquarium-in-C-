@@ -2,7 +2,7 @@
 #define CONSTANTS_H_INCLUDED
 
 enum class enumCarnivorous{ grouper, tuna, clownFish};
-enum class enumHerbivorous { sole, bass, carp};
+enum class enumHerbivorous { };
 
 
 #endif

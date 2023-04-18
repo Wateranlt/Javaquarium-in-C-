@@ -9,12 +9,12 @@
                 "-Wextra",
                 "-Iinclude",
                 "-g",
-                "src/*.cpp",
+                "src\\*.cpp",
                 "-o",
-                "a.exe"
+                "${workspaceFolder}\\a.exe"
             ],
             "options": {
-                "cwd": "${fileDirname}"
+                "cwd": "${workspaceFolder}"
             },
             "problemMatcher": [
                 "$gcc"

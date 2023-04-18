@@ -2,13 +2,13 @@
 
 int main(int argc, char const *argv[])
 {
-    std::vector<Fish *> fishes = { new CarnivorousFish("Jean", true, enumCarnivorous::grouper), 
-    new CarnivorousFish("Alex", false, enumCarnivorous::tuna), 
-    new HerbivorousFish("Will", true, enumHerbivorous::sole)};
-
+    std::vector<Fish *> fishes = { new Fish("Jean", true, true, enumBreed::clownFish), 
+    new Fish("Alex", false, false, enumBreed::bass), 
+    new Fish("Will", true, true, enumBreed::tuna),
+    new Fish("Zach", true, false, enumBreed::sole)};
+    
     Javaquarium *simulation = new Javaquarium(5, fishes);
-    std::cout << "all is working" << std::endl;
-    for(int i = 0 ; i < 5 ; i++)
+    for(int i = 0 ; i < 20 ; i++)
     {
         simulation->actualize();
     }
